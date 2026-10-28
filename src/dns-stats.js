@@ -22,9 +22,21 @@ const { NotImplementedError } = require('../lib');
  * }
  *
  */
-function getDNSStats(/* domains */) {
-  // Remove line below and write your code here
-  throw new NotImplementedError('Not implemented');
+function getDNSStats(domains) {
+  const stats = {};
+
+  for (const domain of domains) {
+  const parts = domain.split('.').reverse();
+
+  for (let i = 0; i < parts.length; i++) {
+    const key = '.' + parts.slice(0, i + 1).join('.');
+
+    stats[key] = (stats[key] || 0) + 1;
+  }
+
+  }
+
+  return stats;
 }
 
 module.exports = {
